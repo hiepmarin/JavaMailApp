@@ -68,7 +68,7 @@ public class SendEmailApp extends javax.swing.JFrame {
         jLabel5.setText("Body");
 
         txtTo.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        txtTo.setText("tranlochiep1111@gmail.com");
+        txtTo.setText("tranlochiep13@gmail.com");
 
         txtUser.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         txtUser.setText("hieptranloc@gmail.com");
@@ -161,21 +161,30 @@ public class SendEmailApp extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtUserActionPerformed
 
+    private void setLbWarning(String text){
+        lbWarning.setText(text);
+    }
     private void btnSendActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSendActionPerformed
+        setLbWarning("Email is sending...");
         user = txtUser.getText();
         pass = txtPass.getText();
         recipients = txtTo.getText();
         subject = txtSubject.getText();
         body = txtBody.getText();
-        
-        SendMaill javamail = new SendMaill(user, pass, recipients, subject, body);
-        try {
-            javamail.run();
-        } catch (MessagingException ex) {
-            Logger.getLogger(SendEmailApp.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (IOException ex) {
-            Logger.getLogger(SendEmailApp.class.getName()).log(Level.SEVERE, null, ex);
+
+        if( user == "" || pass == "" || recipients == "" || subject == "" || body == "") {
+            setLbWarning(warning);
         }
+        else {      
+            SendMaill javamail = new SendMaill(user, pass, recipients, subject, body);
+            try {
+                javamail.run();
+                setLbWarning("Email successfully sent");
+            } catch (MessagingException | IOException ex) {
+                Logger.getLogger(SendEmailApp.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        
     }//GEN-LAST:event_btnSendActionPerformed
 
     /**

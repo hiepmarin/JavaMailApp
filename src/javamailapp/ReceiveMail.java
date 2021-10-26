@@ -58,7 +58,7 @@ public class ReceiveMail {
                 System.out.println("0 emails found in INBOX");
             }
             else{
-                System.out.println(messages.length + " emails found in INBOX");
+                System.out.println(messages.length + " emails found in INBOX\n");
             }
             for(Message message : messages) {
                 String from = "";
@@ -95,7 +95,7 @@ public class ReceiveMail {
         
         
         try{
-            System.out.println("Get mail...");
+            System.out.println("Get mail...]\n");
             getMailWithPOP3();
             System.out.println("Done!!");
         }catch(IOException ex){
