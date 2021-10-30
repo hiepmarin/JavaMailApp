@@ -176,7 +176,7 @@ public class SendEmailApp extends javax.swing.JFrame {
             setLbWarning(warning);
         }
         else {      
-            SendMaill javamail = new SendMaill(user, pass, recipients, subject, body);
+            SendMail javamail = new SendMail(user, pass, recipients, subject, body);
             try {
                 javamail.run();
                 setLbWarning("Email successfully sent");

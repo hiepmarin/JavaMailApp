@@ -13,7 +13,7 @@ import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMultipart;
 
 
-public class SendMaill
+public class SendMail
 {
     Session newSession = null;
     MimeMessage mimeMessage = null;
@@ -23,8 +23,8 @@ public class SendMaill
     String subject; 
     String body;
     
-    public SendMaill(){}
-    public SendMaill(String user, String pass, String recipients, String subject, String body){
+    public SendMail(){}
+    public SendMail(String user, String pass, String recipients, String subject, String body){
         this.user = user;
         this.pass = pass;
         this.recipients = recipients;
@@ -33,7 +33,7 @@ public class SendMaill
     }
     public void run() throws AddressException, MessagingException, IOException
     {
-        SendMaill mail = new SendMaill(user, pass, recipients, subject, body);
+        SendMail mail = new SendMail(user, pass, recipients, subject, body);
         mail.setupServerProperties();
         mail.draftEmail();
         mail.sendEmail();
