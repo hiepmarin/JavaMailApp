@@ -21,7 +21,8 @@ public class SendEmailApp extends javax.swing.JFrame {
     private String recipients; 
     private String subject; 
     private String body;
-    private String warning = "Please fill in all fields!!";
+    private String warningText = "Please fill in all fields!!";
+    private String sendingText = "Email is sending...";
     
     public SendEmailApp() {
         initComponents();
@@ -161,29 +162,27 @@ public class SendEmailApp extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtUserActionPerformed
 
-    private void setLbWarning(String text){
-        lbWarning.setText(text);
-    }
     private void btnSendActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSendActionPerformed
-        setLbWarning("Email is sending...");
         user = txtUser.getText();
         pass = txtPass.getText();
         recipients = txtTo.getText();
         subject = txtSubject.getText();
         body = txtBody.getText();
-
-        if( user == "" || pass == "" || recipients == "" || subject == "" || body == "") {
-            setLbWarning(warning);
+        if( user.isEmpty() || pass.isEmpty() || recipients.isEmpty() || subject.isEmpty() || body.isEmpty()) {
+            lbWarning.setText(warningText);
+            return;
         }
-        else {      
-            SendMail javamail = new SendMail(user, pass, recipients, subject, body);
-            try {
-                javamail.run();
-                setLbWarning("Email successfully sent");
+        else {
+            lbWarning.setText(sendingText);
+        }
+        try {
+                SendMail javaMail = new SendMail(user, pass, recipients, subject, body);
+                javaMail.run();
+                lbWarning.setText("Email successfully sent");
             } catch (MessagingException | IOException ex) {
                 Logger.getLogger(SendEmailApp.class.getName()).log(Level.SEVERE, null, ex);
+                lbWarning.setText("Send mail get error: " + ex.toString());
             }
-        }
         
     }//GEN-LAST:event_btnSendActionPerformed
 
